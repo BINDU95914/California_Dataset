@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertising Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+        .form-group input[type="number"], .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result, .error {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .result {
+            color: #28a745;
+        }
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Advertising Prediction</h1>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="tv_budget">TV Advertising Budget ($):</label>
+                <input type="number" id="tv_budget" name="tv_budget" min="0.0" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="radio_budget">Radio Advertising Budget ($):</label>
+                <input type="number" id="radio_budget" name="radio_budget" min="0.0" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="newspaper_budget">Newspaper Advertising Budget ($):</label>
+                <input type="number" id="newspaper_budget" name="newspaper_budget" min="0.0" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="model_file">Upload Trained Model (Pickle Format):</label>
+                <input type="file" id="model_file" name="model_file" accept=".pkl" required>
+            </div>
+            <button type="submit">Predict Sales</button>
+        </form>
+
+        {% if predicted_sales %}
+            <div class="result">{{ predicted_sales }}</div>
+        {% endif %}
+        
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
